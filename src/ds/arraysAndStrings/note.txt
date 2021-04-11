@@ -5,3 +5,7 @@ Additional Reading: HashTable Collision Resolution, Rabin-Karp Substring search
 
 Additional Questions: OOP-Design(#7.12), Recursion(#8.3), Sorting and Searching(#10.9), C++(#12.11), 
 Moderate Problems(#16.8, #16.17, #16.22), Hard Problems(#17.4, #17.7, #17.13, #17.22, #17.26).
+
+
+#Conclusion
+OneAway problem is hard to understand
