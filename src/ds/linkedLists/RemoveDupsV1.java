@@ -1,24 +1,28 @@
 package ds.linkedLists;
 
-import java.util.HashSet;
 
-public class RemoveDups {
+public class RemoveDupsV1 {
 	
-	// time -> O(N), space O(N)
-	private static void deleteDups(LinkedListNode n) {
-		HashSet<Integer> set = new HashSet<>();
-		LinkedListNode previous = null;
-		while(n != null) {
-			if(set.contains(n.data)) {
-				previous.next = n.next;
-			} else {
-				set.add(n.data);
-				previous = n;
+	// time -> O(n^2), space -> O(1)
+	private static void deleteDups(LinkedListNode head) {
+		if(head == null) 
+			return;
+		
+		LinkedListNode current = head;
+		while(current != null) {
+			/* Remove all future nodes that have the same value */
+			LinkedListNode runner = current;
+			while(runner.next != null) {
+				if(runner.next.data == current.data) {
+					runner.next = runner.next.next;
+				} else {
+					runner = runner.next;
+				}
 			}
-			n = n.next;
+			current = current.next;
 		}
 	}
-	
+
 	public static void main(String[] args) {
 		LinkedListNode head = new LinkedListNode(12);
 		head.next = new LinkedListNode(11);
