@@ -5,6 +5,10 @@ public class LinkedListNode {
 	LinkedListNode next;
 	int data;
 	
+	public LinkedListNode() {
+		super();
+	}
+	
 	public LinkedListNode(int data) {
 		super();
 		this.data = data;
