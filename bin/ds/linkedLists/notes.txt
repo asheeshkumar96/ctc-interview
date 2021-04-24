@@ -1,4 +1,7 @@
-ReturnKthToLast( recursive approach), partitionV2, Palindrome recursive solution is hard to comprehend,
+ReturnKthToLast( recursive approach), 
+partitionV2, 
+Palindrome recursive solution is hard to comprehend,
+sum lists follow up hard,
 
 Additional Questions: Trees and Graphs(#4.3), Object-Oriented Design(#7.12), System Design and Scalability(#9.5), Moderate Problems(#16.25),
 Hard Problems(#17.12)
