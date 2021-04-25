@@ -1,0 +1,16 @@
+Hash Table vs STL Map
+Virtual Functions
+Shallow vs Deep Copy
+Volatile
+Virtual Base Class
+Copy Node
+Smart Pointer
+Malloc
+2D Alloc
+
+----------------------
+Additional Questions:
+Linked Lists(#2.6), 
+Testing(#11.1), 
+Java(#13.4),
+Threads and Locks(#15.3).
