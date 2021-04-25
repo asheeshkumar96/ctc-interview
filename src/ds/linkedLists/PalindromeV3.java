@@ -1,6 +1,18 @@
 package ds.linkedLists;
 
 public class PalindromeV3 {
+	
+	static class Result {
+		public LinkedListNode node;
+		public boolean result;
+		
+		public Result(LinkedListNode n, boolean result) {
+			super();
+			this.node = n;
+			this.result = result;
+		}
+	}
+	
 	// very hard to understand this solution
 	private static boolean isPalindrome(LinkedListNode head) {
 		int length = lengthOfList(head);
@@ -51,17 +63,5 @@ public class PalindromeV3 {
 		head.next.next.next.next.next.next.next = new LinkedListNode(5);
 		
 		System.out.println(isPalindrome(head));
-	}
-	
-}
-
-class Result {
-	public LinkedListNode node;
-	public boolean result;
-	
-	public Result(LinkedListNode n, boolean result) {
-		super();
-		this.node = n;
-		this.result = result;
 	}
 }
