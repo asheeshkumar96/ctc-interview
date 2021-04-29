@@ -1,0 +1,207 @@
+// to check if docker is installed in in included in path
+docker --version
+// to execute an application, without exposing and mapping to any host port
+docker run in28min/todo-rest-api-h2:1.0.0.RELEASE 
+
+// to execute application and mapped with a host port (like -p {hostPort}:{containerPort} )
+docker run -p 5000:5000 in28min/todo-rest-api-h2:1.0.0.RELEASE
+
+* In docker default registry is hub.docker.com.  A registry contains a number of repositories.
+* > Repository(in28min/todo-rest-api-h2)
+* > Tag(1.0.0.RELEASE)
+
+Image is static version, and its running instance is called container.
+
+To kill/stop the container we can press ctrl+C. 
+
+To keep running the container even after pressing ctrl+c, we need to run the container in detached mode using -d flag. Eg. 
+docker run -p 5000:5000 -d in28min/todo-rest-api-h2:1.0.0.RELEASE
+
+* It will print a id and will run in background. 
+* To Print logs of a background container we can issue the command : 
+	docker logs $IdOrSomeStartingPartOfId
+
+* If we want to follow the logs we can user -f flag in command(it would start tailing the logs): 
+	docker logs -f $IdOrSomeStartingPartOfId
+
+
+* To know, which container are currently running, the command is:
+	docker container ls
+
+* To list/know all the images present in our docker machine: (it show the images that are local to machine)
+	docker images
+
+* To list all the container irrespective of their status(running, stopped all included)
+	docker container ls -a
+
+* To stop a container, the command is:
+	docker container stop $IdOfContainer
+
+-----------------------------------------------------------------
+					DOCKER ARCHITECTURE
+-----------------------------------------------------------------
+
+
+
+					DOCKER_CLIENT
+						|
+					DOCKER_DAEMON
+						|
+	____________________|_______________________
+	|					|						|
+CONTAINERS			LOCAL_IMAGES				Image Registry
+													nginx
+													mysql
+													eureka
+													your-app
+
+
+-----------------------------------------------------------------
+					Deployments Using Docker
+-----------------------------------------------------------------
+
+
+	Container1			Container2			Container3
+		|__________________|____________________|
+						|
+					DOCKER_ENGINE
+						|
+					HOST_OS
+						|
+				Cloud_Infrastructure
+
+
+
+-----------------------------------------------------------------
+					Deployments Using Virtual Machines
+-----------------------------------------------------------------
+
+	Application1		Application2			Application3
+		|					|						|
+	Software1			Software2				Software3
+		|					|						|
+	GuestOS1			GuestOS2				GuestOS3
+		---------------------------------------------
+							|
+						Hypervisor
+							|
+						HOST_OS
+							|
+						Hardware
+
+* One of the major problems with these virtual machines architecture was typically these are heavy weight. They had two operating systems, host OS and Guest OS. And that makes the whole things little
+heavy. And that'w why docker comes in.
+
+* If we have some infrastructure, and a host os installed, then all we need to do is just install docker engine for that specific OS. And docker would take care of managing these containers.
+* The docker images contains all that is needed to run a container(all the libraries, all the softwares are directly part of these containers).
+* Because there is just one OS(the host OS), the docker is relatively lightweight, and therefore, very very efficient. And that's why all the cloud providers provide a number of services around docker.
+
+* Azure provides a service called Azure Container Service, AWS provides Elastic Container service. 
+* So, using docker on local as well on cloud is very easy, thats why docker is really popular during the last few years.
+
+// ------------------------ DOCKER IMAGE COMMANDS-------------------------------
+
+* To tag a repository the command is:
+	docker tag in28min/todo-rest-api-h2:1.0.0.RELEASE in28min/todo-rest-api-h2:lastest
+The above command will tag the image in 'in28min/todo-rest-api-h2:1.0.0.RELEASE' as 'in28min/todo-rest-api-h2:lastest' image
+
+* To search an image in the repository, the command is:
+	docker search $nameOfImage
+	Eg. docker search mysql
+
+*	To see, the steps involved in creating an image, the command is:
+	docker image history $ImageIdOrImageNameColonTag
+	Ex. - docker image history f8049a029560
+		  docker image history in28min/todo-rest-api-h2:latest
+
+* 	Also, we can do 'docker image inspect $ImageIdOrImageNameColonTag'
+	Ex - docker image inspect f8049a029560
+		 docker image inspect in28min/todo-rest-api-h2:latest
+
+
+
+** To remove an image from local
+	docker image remove $ImageIdOrImageNameColonTag
+	Eg. docker image remove mysql
+		docker image remove in28min/todo-rest-api-h2:latest
+	Please note that it will remove the image from local only, not from the registry.
+
+
+//--------------------------- DOCKER CONTAINER COMMANDS --------------------------
+** The command 'docker run ' is actually a shortcut for the command 'docker container run'
+	docker container run -p 5000:5000 -d in28min/todo-rest-api-h2:1.0.0.RELEASE
+
+* To pause a container, the command is:
+	docker container pause $uniqueContainerId
+
+* To unpause/resume a container, the command is:
+	docker container unpause $uniqueContainerId
+
+* To tail the log of a container the command is:
+	docker logs -f $uniqueContainerId
+
+** So, pause stops the container in that specific state.
+
+* To stop/gracefull shutdown a running container, the command is:
+	docker container stop $uniqueContainerid
+
+* To inspect a container, the command is:
+	docker container inspect $uniqueContainerId
+	This command gives a lot of meta data about a specific container.
+
+* To list running containers, the command is:
+	docker container ls
+
+* To list containers irrespective of their status:
+	docker container ls -a
+
+* To remove all the stopped container, the command is:
+	docker container prune
+
+***** When we do 'container stop $containerId', the signal that is passed is SIGTERM , which is for gracefull termination of running process.
+
+* To kill/forcefull termination, the command is:
+	docker container kill $uniqueContainerId
+
+**** When we do 'container kill $uniqueContainerid', the signal that is passed is SIGKILL, which is for forcefull termination of running process.
+
+
+// --restart=always policy, by default it is --restart=no
+*******When the 'docker run ' command is executed with flag '--restart=always', the container will automatically be started in case of docker restart.
+
+
+** To know what is happening in background(events), the command is:
+	docker events
+
+** To know what process are running is a specific container, the command is:
+	docker top $uniqueContainerId
+
+** To knwo the resource stats for all the running container, the command is:
+	docker stats
+
+** To run with specific memory and CPU limits, the flag '-m $valueWithMsuffix' and '--cpu-quota valueOutOfHundredThousand'
+	docker run -p 5001:5000 -m 512m --cpu-quota 5000 -d in28min/todo-rest-api-h2:0.0.1-SNAPSHOT
+
+** To get the docker system overview:
+	docker system df
+
+
+	// HOW TO CREATE DOCKER IMAGES MANUALLY
+
+
+	// CREATING IMAGES  USING dockerfile-maven plugin
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
