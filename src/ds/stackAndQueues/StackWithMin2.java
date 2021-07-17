@@ -2,11 +2,10 @@ package ds.stackAndQueues;
 
 import java.util.Stack;
 
-public class StackWithMin2 extends Stack<Integer>{
+public class StackWithMin2 extends Stack<Integer> {
 
 	private static final long serialVersionUID = 1L;
-	
-	
+
 	Stack<Integer> s2;
 	
 	public StackWithMin2() {
