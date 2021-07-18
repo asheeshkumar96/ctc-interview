@@ -1,3 +1,5 @@
+Additional Reading: Topological Sort(pg 632), Dijkstra's Algorithm(pg 633), AVL Trees(pg 637),
+Red Black Trees(pg 639).
 
 
 Additional Questions: 
