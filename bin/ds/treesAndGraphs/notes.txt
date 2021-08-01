@@ -1,3 +1,9 @@
+ListsOfDepth tricky question
+inorder successor is tricky in case of no right child.
+BuildOrder of projects (or topological sorts) wrapping mechanism out of understanding(solution 1), any HARD prob.
+
+
+
 Additional Reading: Topological Sort(pg 632), Dijkstra's Algorithm(pg 633), AVL Trees(pg 637),
 Red Black Trees(pg 639).
 
