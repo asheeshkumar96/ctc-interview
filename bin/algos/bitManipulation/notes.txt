@@ -1,6 +1,7 @@
 Arithmetic VS. Logical Right Shift  confusion over the effects.
 
-
+The problem NextNumber is very hard to understand, solving it a milestone.
+DrawLine is also a hard problem.
 
 
 
